@@ -58,5 +58,20 @@ python eva.py
 
 If you found this repository is helpful, please cite our paper:
 ```
-
+@article{yin-etal-2024-source-free,
+    title = "Source-Free Domain Adaptation for Question Answering with Masked Self-training",
+    author = "Yin, Maxwell J.  and
+      Wang, Boyu  and
+      Dong, Yue  and
+      Ling, Charles",
+    journal = "Transactions of the Association for Computational Linguistics",
+    volume = "12",
+    year = "2024",
+    address = "Cambridge, MA",
+    publisher = "MIT Press",
+    url = "https://aclanthology.org/2024.tacl-1.40",
+    doi = "10.1162/tacl_a_00669",
+    pages = "721--737",
+    abstract = "Previous unsupervised domain adaptation (UDA) methods for question answering (QA) require access to source domain data while fine-tuning the model for the target domain. Source domain data may, however, contain sensitive information and should be protected. In this study, we investigate a more challenging setting, source-free UDA, in which we have only the pretrained source model and target domain data, without access to source domain data. We propose a novel self-training approach to QA models that integrates a specially designed mask module for domain adaptation. The mask is auto-adjusted to extract key domain knowledge when trained on the source domain. To maintain previously learned domain knowledge, certain mask weights are frozen during adaptation, while other weights are adjusted to mitigate domain shifts with pseudo-labeled samples generated in the target domain. Our empirical results on four benchmark datasets suggest that our approach significantly enhances the performance of pretrained QA models on the target domain, and even outperforms models that have access to the source data during adaptation.",
+}
 ```
