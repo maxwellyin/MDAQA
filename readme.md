@@ -17,9 +17,10 @@ git clone git@github.com:maxwellyin/MDAQA.git
 Create the environment and download the packages
 
 ```
-conda create -n MDAQA python==3.9
+conda create -n MDAQA python==3.12
 conda activate MDAQA
 pip install -r requirements.txt
+pip install -e .
 ```
 
 ## Data Preparation
@@ -29,7 +30,24 @@ The datasets utilized for this study are sourced from the [MRQA Shared Task 2019
 Upon downloading the datasets, execute the following command to process the data appropriately:
 
 ```
-python dataProcess/process.py
+python scripts/preprocess.py --domain SQuAD --split train
+python scripts/preprocess.py --domain SQuAD --split test
+python scripts/preprocess.py --domain NaturalQuestionsShort --split train
+python scripts/preprocess.py --domain NaturalQuestionsShort --split test
+```
+
+Repository layout:
+
+```
+mdaqa/
+  data.py
+  modeling_roberta.py
+  util.py
+scripts/
+  preprocess.py
+  train.py
+  adapt.py
+  evaluate.py
 ```
 
 ## Training and Evaluation
@@ -37,21 +55,38 @@ python dataProcess/process.py
 Train the base model:
 
 ```
-cd v2
-python base_train.py
+python scripts/train.py \
+  --source-domain SQuAD \
+  --target-domain NaturalQuestionsShort
 ```
 
 Adapt to target domain:
 
 ```
-python adaptation.py
+python scripts/adapt.py \
+  --source-domain SQuAD \
+  --target-domain NaturalQuestionsShort
 ```
 
 Evaluation:
 
 ```
-python eva.py
+python scripts/evaluate.py \
+  --source-domain SQuAD \
+  --target-domain NaturalQuestionsShort
 ```
+
+The refactored scripts now expose command-line arguments instead of requiring source edits for common changes such as domains, data directories, batch size, and checkpoint locations.
+
+Default checkpoint layout:
+
+```
+checkpoint/<source-domain>-<model-checkpoint>/
+  source_model/
+  self-train/<loop-id>/
+```
+
+For backward compatibility, `scripts/adapt.py` and `scripts/evaluate.py` will also detect legacy source checkpoint directories such as `BMW_source` and `mask`.
 
 
 ## Citing 

@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mdaqa"
+version = "0.1.0"
+description = "Source-free domain adaptation for question answering with masked self-training."
+readme = "readme.md"
+requires-python = "=3.12"
+authors = [
+  { name = "Maxwell J. Yin" },
+]
+
+[tool.setuptools]
+packages = ["mdaqa"]

@@ -1,6 +1,6 @@
 # transformers 4.21.1
 # %%
-from util import BOTTLE_DIM, MASK_SCALE
+from .util import BOTTLE_DIM, MASK_SCALE
 import math
 from typing import List, Optional, Tuple, Union
 
